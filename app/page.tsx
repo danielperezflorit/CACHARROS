@@ -77,6 +77,9 @@ export default function App() {
       case "cerveza":
         return "🍺";
 
+      case "vomito":
+        return "🤢";
+
       default:
         return "🍹";
     }
@@ -126,15 +129,33 @@ export default function App() {
     );
   };
 
-  // PENALIZACIÓN
+  // VOMITAR
   const penalize = (points: number) => {
     const newScore = Math.max(0, score + points);
 
+    // NUEVO EVENTO HISTORIAL
+    const nuevoEvento: HistorialItem = {
+      tipo: "vomito",
+      puntos: points,
+      fecha: new Date().toLocaleString(),
+    };
+
+    const nuevoHistorial = [
+      nuevoEvento,
+      ...historial,
+    ];
+
     setScore(newScore);
+    setHistorial(nuevoHistorial);
 
     localStorage.setItem(
       "score",
       newScore.toString()
+    );
+
+    localStorage.setItem(
+      "historial",
+      JSON.stringify(nuevoHistorial)
     );
   };
 
@@ -286,7 +307,8 @@ export default function App() {
               >
                 <span>
                   {getEmoji(item.tipo)}{" "}
-                  {item.tipo} (+{item.puntos})
+                  {item.tipo} ({item.puntos > 0 ? "+" : ""}
+                  {item.puntos})
                 </span>
 
                 <span
