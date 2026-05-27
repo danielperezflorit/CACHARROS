@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect, CSSProperties } from "react";
 
 type Bebidas = {
@@ -7,6 +6,7 @@ type Bebidas = {
   chupito: number;
   vino: number;
   cerveza: number;
+  rebujito: number;
 };
 
 type HistorialItem = {
@@ -20,6 +20,7 @@ const initialBebidas: Bebidas = {
   chupito: 0,
   vino: 0,
   cerveza: 0,
+  rebujito: 0,
 };
 
 export default function App() {
@@ -76,6 +77,9 @@ export default function App() {
 
       case "cerveza":
         return "🍺";
+      
+      case "rebujito":
+        return "🧃";
 
       case "vomito":
         return "🤢";
@@ -201,6 +205,10 @@ export default function App() {
         <span style={styles.contador}>
           🍺 {bebidas.cerveza}
         </span>
+
+        <span style={styles.contador}>
+          🧃 {bebidas.rebujito}
+        </span>
       </div>
 
       {/* BOTONES */}
@@ -211,10 +219,10 @@ export default function App() {
             ...styles.copa,
           }}
           onClick={() =>
-            updateScore(5, "freskito")
+            updateScore(4, "freskito")
           }
         >
-          🍸 Freskito (+5)
+          🍸 Freskito (+4)
         </button>
 
         <button
@@ -247,10 +255,22 @@ export default function App() {
             ...styles.cerveza,
           }}
           onClick={() =>
-            updateScore(1, "cerveza")
+            updateScore(2, "cerveza")
           }
         >
-          🍺 Rubia (+1)
+          🍺 Rubia (+2)
+        </button>
+
+        <button
+          style={{
+            ...styles.button,
+            ...styles.rebujito,
+          }}
+          onClick={() =>
+            updateScore(1, "rebujito")
+          }
+        >
+          🧃 Rebujito y resto (+1)
         </button>
 
         <button
@@ -330,9 +350,11 @@ export default function App() {
 
 const styles: Record<string, CSSProperties> = {
   container: {
-    minHeight: "100vh",
-    background:
-      "linear-gradient(135deg, #1E1E2E, #2A2A40)",
+     minHeight: "100vh",
+    backgroundImage: "url('/FONDO.png')",
+    backgroundSize: "40%",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -409,6 +431,10 @@ const styles: Record<string, CSSProperties> = {
 
   cerveza: {
     backgroundColor: "#2A9D8F",
+  },
+
+  rebujito: {
+    backgroundColor: "#1D3557",
   },
 
   vomito: {
