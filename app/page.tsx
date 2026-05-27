@@ -352,7 +352,7 @@ const styles: Record<string, CSSProperties> = {
   container: {
      minHeight: "100vh",
     backgroundImage: "url('/FONDO.png')",
-    backgroundSize: "40%",
+    backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     display: "flex",
